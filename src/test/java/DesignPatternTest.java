@@ -4,7 +4,17 @@ import com.kihyeonkim.pattern.composite.HardDrive;
 import com.kihyeonkim.pattern.composite.Mouse;
 import com.kihyeonkim.pattern.singleton.SingletonInstance;
 import com.kihyeonkim.pattern.singleton.ThreadSafeSingletonInstance;
+import com.kihyeonkim.pattern.strategy.move.Flying;
+import com.kihyeonkim.pattern.strategy.move.Walking;
+import com.kihyeonkim.pattern.strategy.unit.Firebat;
+import com.kihyeonkim.pattern.strategy.unit.Marine;
+import com.kihyeonkim.pattern.strategy.unit.Unit;
+import com.kihyeonkim.pattern.strategy.unit.Wraith;
+import com.kihyeonkim.pattern.strategy.weapon.FlameThrower;
+import com.kihyeonkim.pattern.strategy.weapon.GaussRifle;
+import com.kihyeonkim.pattern.strategy.weapon.Missile;
 import org.junit.jupiter.api.Test;
+
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -79,5 +89,34 @@ public class DesignPatternTest {
 
 		int count = (int) instanceNameList.stream().distinct().count();
 		assertEquals(1, count);
+	}
+
+	@Test
+	public void testStrategyPattern() {
+		Unit fireBat = new Firebat();
+		fireBat.setTransportation(new Walking());
+		fireBat.setWeapon(new FlameThrower());
+
+		Unit marine = new Marine();
+		marine.setTransportation(new Walking());
+		marine.setWeapon(new GaussRifle());
+
+		Unit wraith = new Wraith();
+		wraith.setWeapon(new Missile());
+		wraith.setTransportation(new Flying());
+
+		Unit specialWraith = new Wraith();
+
+		fireBat.attack();
+		fireBat.move();
+
+		marine.attack();
+		marine.move();
+
+		wraith.attack();
+		wraith.move();
+
+		specialWraith.attack();
+		specialWraith.move();
 	}
 }
