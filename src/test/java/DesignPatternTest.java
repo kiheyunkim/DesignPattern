@@ -4,6 +4,7 @@ import com.kihyeonkim.pattern.composite.HardDrive;
 import com.kihyeonkim.pattern.composite.Mouse;
 import com.kihyeonkim.pattern.singleton.SingletonInstance;
 import com.kihyeonkim.pattern.singleton.ThreadSafeSingletonInstance;
+import com.kihyeonkim.pattern.state.Light;
 import com.kihyeonkim.pattern.strategy.move.Flying;
 import com.kihyeonkim.pattern.strategy.move.Walking;
 import com.kihyeonkim.pattern.strategy.unit.Firebat;
@@ -118,5 +119,21 @@ public class DesignPatternTest {
 
 		specialWraith.attack();
 		specialWraith.move();
+	}
+
+	@Test
+	public void testStatePattern() {
+		Light light = new Light();
+		light.getCurrentState();
+
+		light.pushOffButton();
+		light.getCurrentState();
+		light.pushOnButton();
+		light.getCurrentState();
+
+		light.pushOnButton();
+		light.getCurrentState();
+		light.pushOffButton();
+		light.getCurrentState();
 	}
 }
