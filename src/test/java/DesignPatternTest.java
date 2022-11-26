@@ -2,6 +2,10 @@ import com.kihyeonkim.pattern.composite.Computer;
 import com.kihyeonkim.pattern.composite.Display;
 import com.kihyeonkim.pattern.composite.HardDrive;
 import com.kihyeonkim.pattern.composite.Mouse;
+import com.kihyeonkim.pattern.decorator.Coffee;
+import com.kihyeonkim.pattern.decorator.IceDecorator;
+import com.kihyeonkim.pattern.decorator.MixCoffee;
+import com.kihyeonkim.pattern.decorator.SugarDecorator;
 import com.kihyeonkim.pattern.singleton.SingletonInstance;
 import com.kihyeonkim.pattern.singleton.ThreadSafeSingletonInstance;
 import com.kihyeonkim.pattern.state.Light;
@@ -135,5 +139,17 @@ public class DesignPatternTest {
 		light.getCurrentState();
 		light.pushOffButton();
 		light.getCurrentState();
+	}
+
+	@Test
+	public void testDecoratorPattern() {
+		Coffee defaultMixCoffee = new MixCoffee();
+		defaultMixCoffee.make();
+
+		Coffee mixCoffeeWithMixCoffee = new SugarDecorator(new MixCoffee());
+		mixCoffeeWithMixCoffee.make();
+
+		Coffee mixAllIngredient = new IceDecorator(new SugarDecorator(new MixCoffee()));
+		mixAllIngredient.make();
 	}
 }
